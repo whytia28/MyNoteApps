@@ -1,7 +1,7 @@
 package com.dicoding.mynoteapps.repository
 
 import android.app.Application
-import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.dicoding.mynoteapps.database.Note
 import com.dicoding.mynoteapps.database.NoteDao
 import com.dicoding.mynoteapps.database.NoteRoomDatabase
@@ -17,7 +17,7 @@ class NoteRepository(application: Application) {
         mNotesDao = db.noteDao()
     }
 
-    fun getAllNotes(): LiveData<List<Note>> = mNotesDao.getAllNotes()
+    fun getAllNotes(): DataSource.Factory<Int, Note> = mNotesDao.getAllNotes()
 
     fun insert(note: Note) {
         executorService.execute { mNotesDao.insert(note) }
